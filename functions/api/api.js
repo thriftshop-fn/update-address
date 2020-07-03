@@ -106,7 +106,7 @@ exports.handler = async (event) => {
       ) {
         rows[rowIndex].receiver_name = receiver_name;
         rows[rowIndex].receiver_phone = receiver_phone;
-        rows[rowIndex].address = address;
+        rows[rowIndex].delivery_address = address;
         rows[rowIndex].notes = notes;
         rows[rowIndex].deliverable = true;
         await rows[rowIndex].save();
