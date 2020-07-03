@@ -1,8 +1,11 @@
 {
-  "name": "template",
+  "name": "update-address-fn",
   "version": "1.0.0",
-  "description": "## Usage",
+  "description": "Updates Delivery Address",
   "author": "GoldCoders",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "google-spreadsheet": "^3.0.11"
+  }
 }
