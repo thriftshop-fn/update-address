@@ -94,23 +94,29 @@ exports.handler = async (event) => {
       };
       return error;
     }
-    let message = "This Purchase is Not Deliverable";
-    if (rows[rowIndex].received === "no" || rows[rowIndex].received == false){
-        if (
-          rows[rowIndex].deliverable
-        ) {
-          rows[rowIndex].receiver_name = receiver_name;
-          rows[rowIndex].receiver_phone = receiver_phone;
-          rows[rowIndex].address = address;
-          rows[rowIndex].notes = notes;
-          rows[rowIndex].deliverable = true;
-          await rows[rowIndex].save();
-          message = "Delivery Address Updated.";
-        }
-    }else{
-        message = "This Purchase Has Already Been Marked As Received!";
+    let message = "";
+
+    if (!rows[rowIndex].deliverable || rows[rowIndex].deliverable === "FALSE") {
+      message =
+        "Opps! Cant Updated Delivery Address, The Type of Purchase was Non-Deliverable!";
+    } else {
+      if (
+        rows[rowIndex].received === "no" ||
+        rows[rowIndex].received == false
+      ) {
+        rows[rowIndex].receiver_name = receiver_name;
+        rows[rowIndex].receiver_phone = receiver_phone;
+        rows[rowIndex].address = address;
+        rows[rowIndex].notes = notes;
+        rows[rowIndex].deliverable = true;
+        await rows[rowIndex].save();
+        message = "Delivery Address Updated.";
+      } else {
+        message =
+          "Oops! Cant Update Delivery Address, Product Purchase was Already Received!";
+      }
     }
-      
+
     return {
       statusCode: 200,
       body: JSON.stringify({
