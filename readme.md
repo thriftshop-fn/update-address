@@ -106,6 +106,20 @@ https://docs.google.com/spreadsheets/d/COPY-THIS-URL-SEGMENT/edit#gid=0
 
 - notes is optional
 
+> **Notes**
+
+- This will not be updated if, 
+    1. customer already received their product purchase. 
+    2. customer bought a non deliverable item (intangible)
+
+> **Success Response**
+
+```json
+{
+    "message":"Delivery Address Updated."
+}
+```
+
 </details>
 
 ## Deploy
