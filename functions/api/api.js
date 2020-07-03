@@ -95,18 +95,23 @@ exports.handler = async (event) => {
       return error;
     }
     let message = "This Purchase is Not Deliverable";
-    if (
-      rows[rowIndex].intangible == false ||
-      rows[rowIndex].intangible === "no"
-    ) {
-      rows[rowIndex].receiver_name = receiver_name;
-      rows[rowIndex].receiver_phone = receiver_phone;
-      rows[rowIndex].address = address;
-      rows[rowIndex].notes = notes;
-      rows[rowIndex].intangible = "no";
-      await rows[rowIndex].save();
-      message = "Delivery Address Updated.";
+    if (rows[rowIndex].received === "no" || rows[rowIndex].received == false){
+        if (
+          rows[rowIndex].intangible == false ||
+          rows[rowIndex].intangible === "no"
+        ) {
+          rows[rowIndex].receiver_name = receiver_name;
+          rows[rowIndex].receiver_phone = receiver_phone;
+          rows[rowIndex].address = address;
+          rows[rowIndex].notes = notes;
+          rows[rowIndex].intangible = "no";
+          await rows[rowIndex].save();
+          message = "Delivery Address Updated.";
+        }
+    }else{
+        message = "This Purchase Has Already Been Marked As Received!";
     }
+      
     return {
       statusCode: 200,
       body: JSON.stringify({
