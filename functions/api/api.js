@@ -97,14 +97,13 @@ exports.handler = async (event) => {
     let message = "This Purchase is Not Deliverable";
     if (rows[rowIndex].received === "no" || rows[rowIndex].received == false){
         if (
-          rows[rowIndex].intangible == false ||
-          rows[rowIndex].intangible === "no"
+          rows[rowIndex].deliverable
         ) {
           rows[rowIndex].receiver_name = receiver_name;
           rows[rowIndex].receiver_phone = receiver_phone;
           rows[rowIndex].address = address;
           rows[rowIndex].notes = notes;
-          rows[rowIndex].intangible = "no";
+          rows[rowIndex].deliverable = true;
           await rows[rowIndex].save();
           message = "Delivery Address Updated.";
         }
