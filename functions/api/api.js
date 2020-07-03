@@ -103,7 +103,7 @@ exports.handler = async (event) => {
       rows[rowIndex].receiver_phone = receiver_phone;
       rows[rowIndex].address = address;
       rows[rowIndex].notes = notes;
-      rows[rowIndex].intangible = no;
+      rows[rowIndex].intangible = "no";
       await rows[rowIndex].save();
       message = "Delivery Address Updated.";
     }
